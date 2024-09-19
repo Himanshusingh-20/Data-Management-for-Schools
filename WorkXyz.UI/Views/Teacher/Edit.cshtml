@@ -1,0 +1,54 @@
+﻿@model WorkXyz.UI.ViewModel.TeacherViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+
+<h4> Edit TeacherViewModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <input asp-for="Id" type="hidden" class="form-control" />
+                <span asp-validation-for="Id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <ul>
+            @for(int i = 0; i < Model.SubjectsList.Count; i++)
+            {
+                <li style="list-style:none">
+                <input type="hidden"asp-for="@Model.SubjectsList[i].Id" />
+                <input asp-for="@Model.SubjectsList[i].IsChecked" />
+                @Model.SubjectsList[i].Text
+                    </li>
+            }
+            </ul>
+            <div class="form-group">
+                <label asp-for="ImagePath" class="control-label"></label>
+                <input asp-for="ImagePath" class="form-control" />
+                <span asp-validation-for="ImagePath" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+    <div class="col-md-4">
+        <img src="@Model.ProfileImage" height="200" width="200"/>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

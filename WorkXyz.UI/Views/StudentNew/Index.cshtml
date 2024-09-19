@@ -1,0 +1,45 @@
+﻿@model IEnumerable<StudentViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>StudentNew List</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create New StudentNew</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Id
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                Banch Name
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BranchName)
+            </td>
+            <td>
+                    <partial name="_Action" model="@item.Id" />
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
